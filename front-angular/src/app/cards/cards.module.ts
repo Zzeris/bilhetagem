@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
+import { AppMaterialModule } from './../shared/app-material/app-material.module';
 import { CardsRoutingModule } from './cards-routing.module';
 import { CardsComponent } from './cards/cards.component';
 
@@ -11,7 +12,8 @@ import { CardsComponent } from './cards/cards.component';
   ],
   imports: [
     CommonModule,
-    CardsRoutingModule
+    CardsRoutingModule,
+    AppMaterialModule
   ]
 })
 export class CardsModule { }
