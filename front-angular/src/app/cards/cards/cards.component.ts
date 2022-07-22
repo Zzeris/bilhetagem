@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { Card } from './../model/card';
+import { CardsService } from './../services/cards.service';
 
 @Component({
   selector: 'app-cards',
@@ -9,15 +11,13 @@ import { Card } from './../model/card';
 })
 export class CardsComponent implements OnInit {
 
-  cards: Card[] = [
-    { _id: "1", name: "Comum", type:"1" },
-    { _id: "2", name: "Estudante", type:"2" },
-    { _id: "3", name: "Trabalhador", type:"3" }
-  ];
+  cards: Observable<Card[]>;
 
   displayedColumns = ['name', 'type'];
 
-  constructor() { }
+  constructor(private cardsService: CardsService) {
+    this.cards = this.cardsService.list();
+  }
 
   ngOnInit(): void {
   }
