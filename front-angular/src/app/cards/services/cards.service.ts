@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, tap } from 'rxjs';
+import { first, tap, delay } from 'rxjs';
 
 import { Card } from '../model/card';
 
@@ -17,6 +17,7 @@ export class CardsService {
     return this.httpClient.get<Card[]>(this.API)
     .pipe(
       first(),
+      delay(60000),
       tap(cards => console.log(cards))
     );
   }

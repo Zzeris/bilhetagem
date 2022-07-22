@@ -11,12 +11,12 @@ import { CardsService } from './../services/cards.service';
 })
 export class CardsComponent implements OnInit {
 
-  cards: Observable<Card[]>;
+  cards$: Observable<Card[]>;
 
   displayedColumns = ['name', 'type'];
 
   constructor(private cardsService: CardsService) {
-    this.cards = this.cardsService.list();
+    this.cards$ = this.cardsService.list();
   }
 
   ngOnInit(): void {
