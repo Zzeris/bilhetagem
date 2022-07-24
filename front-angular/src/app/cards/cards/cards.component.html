@@ -14,7 +14,9 @@
       <!-- Type Column -->
       <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef> Tipo </th>
-        <td mat-cell *matCellDef="let card"> {{card.type}} </td>
+        <td mat-cell *matCellDef="let card"> {{card.type}}
+          <mat-icon aria-hidden="false" aria-label="Tipo do Cartão">{{ card.type | type }}</mat-icon>
+        </td>
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
