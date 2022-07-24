@@ -17,7 +17,7 @@ export class CardsService {
     return this.httpClient.get<Card[]>(this.API)
     .pipe(
       first(),
-      delay(60000),
+      delay(5000),
       tap(cards => console.log(cards))
     );
   }
