@@ -1,3 +1,4 @@
+import { CardFormComponent } from './card-form/card-form.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -7,6 +8,9 @@ const routes: Routes = [
   {
     path: '',
     component: CardsComponent
+  },
+  {
+    path: 'new', component: CardFormComponent
   }
 ];
 

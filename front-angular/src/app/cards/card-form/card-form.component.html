@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-toolbar color="primary">Detalhes do cartão</mat-toolbar>
+
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-form-field class="full-width">
+          <input matInput formControlName="name"
+                  type="text"
+                  required
+                  placeholder="Nome">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Tipo</mat-label>
+        <mat-select>
+          <mat-option value="null"> </mat-option>
+          <mat-option value="comum">Comum</mat-option>
+          <mat-option value="estudante">Estudante</mat-option>
+          <mat-option value="trabalhador">Trabalhador</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button (click)="onCancel()">Cancelar</button>
+  </mat-card-actions>
+</mat-card>

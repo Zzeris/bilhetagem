@@ -21,4 +21,8 @@ export class CardsService {
       tap(cards => console.log(cards))
     );
   }
+
+  save(record: Card) {
+    return this.httpClient.post<Card>(this.API, record)
+  }
 }
