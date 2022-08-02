@@ -44,6 +44,12 @@ export class CardsComponent implements OnInit {
 
   onAdd() {
     this.router.navigate(['new'], {relativeTo: this.route})
+    .catch(
+      catchError(error => {
+        this.onError('Erro ao salvar Cartão.')
+        return of([])
+      })
+    );
   }
 
 }

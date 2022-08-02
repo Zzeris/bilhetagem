@@ -2,7 +2,10 @@ package com.luiz.controller;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +24,12 @@ public class CardController {
     @GetMapping
     public List<Card> list(){
         return cardRepository.findAll();
+    }
+
+    @RequestMapping
+    public ResponseEntity<Card> create(@RequestBody Card card){
+        return ResponseEntity.status(HttpStatus.CREATED)
+            .body(cardRepository.save(card));
     }
     
 }

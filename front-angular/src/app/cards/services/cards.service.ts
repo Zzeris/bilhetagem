@@ -9,7 +9,7 @@ import { Card } from '../model/card';
 })
 export class CardsService {
 
-  private readonly API = '/assets/cards.json'
+  private readonly API = 'api/cards'
 
   constructor(private httpClient: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class CardsService {
     return this.httpClient.get<Card[]>(this.API)
     .pipe(
       first(),
-      delay(1000),
+      delay(500),
       tap(cards => console.log(cards))
     );
   }
