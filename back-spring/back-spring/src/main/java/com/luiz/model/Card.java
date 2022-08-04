@@ -22,6 +22,6 @@ public class Card {
     @Column(length = 200, nullable = false)
     private String name;
 
-    @Column(length = 150, nullable = false)
+    @Column(length = 150)
     private String type;
 }

@@ -28,9 +28,8 @@ export class CardFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.service.save(this.form.value)
-      .subscribe(result => this.onSuccess,
-      error => this.onError())
+    console.log(this.form.value)
+    this.service.save(this.form.value).subscribe(result => this.onSuccess(), error => this.onError());
   }
 
   onCancel() {

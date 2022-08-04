@@ -23,6 +23,6 @@ export class CardsService {
   }
 
   save(record: Card) {
-    return this.httpClient.post<Card>(this.API, record)
+    return this.httpClient.post<Card>(this.API, record).pipe(first());
   }
 }
