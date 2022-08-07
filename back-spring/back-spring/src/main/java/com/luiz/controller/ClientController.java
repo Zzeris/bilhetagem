@@ -1,5 +1,6 @@
 package com.luiz.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -17,57 +18,65 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.luiz.model.Card;
-import com.luiz.service.CardService;
+import com.luiz.model.Client;
+import com.luiz.service.ClientService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/api/cards")
+@RequestMapping("/api/clients")
 @AllArgsConstructor
-public class CardController {
+public class ClientController {
 
     @Autowired
-    private CardService cardService;
+    private ClientService clientService;
 
     private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Card create(@RequestBody Card card){
-        return cardService.create(card);
+    public Client create(@RequestBody Client client){
+        List<Card> cards = new ArrayList<>();
+        List<Card> cardList = client.getCardList();
+        for (Card card:cardList) {
+            card.setClient(client);
+            cards.add(card);
+        }
+        client.setCardList(cards);
+        return clientService.create(client);
     }
     
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public List<Card> list(){
-        return cardService.list();
+    public List<Client> list(){
+        return clientService.list();
     }
 
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Card findOne(@PathVariable("id") Long id){
-        return cardService.findOne(id)
-        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cartão não encontrado."));
+    public Client findOne(@PathVariable("id") Long id){
+        return clientService.findOne(id)
+        .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable("id") Long id){
-        cardService.findOne(id)
-        .map(card -> {
-            cardService.remove(card.getId());
+        clientService.findOne(id)
+        .map(client -> {
+            clientService.remove(client.getId());
             return Void.TYPE;
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cartão não encontrado."));
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable("id") Long id, @RequestBody Card card){
-        cardService.findOne(id)
-        .map(cardBase -> {
-            modelMapper.map(card, cardBase);
-            create(cardBase);
+    public void update(@PathVariable("id") Long id, @RequestBody Client client){
+        clientService.findOne(id)
+        .map(clientBase -> {
+            modelMapper.map(client, clientBase);
+            create(clientBase);
             return Void.TYPE;
-        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cartão não encontrado."));
+        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado."));
     }
 }
