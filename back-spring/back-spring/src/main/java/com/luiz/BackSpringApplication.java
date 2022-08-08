@@ -28,11 +28,11 @@ public class BackSpringApplication {
 		return args -> {
 			cardRepository.deleteAll();
 
-			Card c = new Card();
-			c.setName("jose");
-			c.setType("comum");
+			//Card c = new Card();
+			//c.setName("jose");
+			//c.setType("comum");
 			
-			cardRepository.save(c);
+			//cardRepository.save(c);
 		};
 	}
 }

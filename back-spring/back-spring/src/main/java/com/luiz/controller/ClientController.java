@@ -1,6 +1,5 @@
 package com.luiz.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.modelmapper.ModelMapper;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.luiz.model.Card;
 import com.luiz.model.Client;
 import com.luiz.service.ClientService;
 
@@ -36,13 +34,6 @@ public class ClientController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Client create(@RequestBody Client client){
-        List<Card> cards = new ArrayList<>();
-        List<Card> cardList = client.getCardList();
-        for (Card card:cardList) {
-            card.setClient(client);
-            cards.add(card);
-        }
-        client.setCardList(cards);
         return clientService.create(client);
     }
     

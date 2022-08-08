@@ -1,14 +1,12 @@
 package com.luiz.model;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -32,6 +30,7 @@ public class Client {
     @Column(length = 100)
     private String password;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
-    private List<Card> cardList;
+    @ManyToOne
+    //@JoinColumn(name = "id_card")
+    private Card card;
 }
